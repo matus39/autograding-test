@@ -1,0 +1,59 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ test ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Build with Maven
+        id: maven-build-step
+        run: mvn -B package --file pom.xml --log-file build-output.txt
+
+      #      - name: Upload log file
+      #        uses: actions/upload-artifact@v2
+      #        with:
+      #          name: build-output
+      #          path: build-output.txt
+
+      #      - name: Test print
+      #        uses: actions/download-artifact@v2
+      #        with:
+      #          name: build-output
+      #      - shell: bash
+      #        run: |
+      #          value=`cat build-output.txt`
+      #          echo $value
+
+      #      - name: Send output to server
+      #        uses: indiesdev/curl@v1
+      #        env:
+      #          JSON_VAR: ${{ format('{{"studentId":"{0}","output":"{1}"}}', '74144', logOutputVar) }}
+      #        with:
+      #          url: https://autograding-be.herokuapp.com/build-outputs
+      #          method: 'POST'
+      #          accept: 200,201,204
+      #          headers: '{ "Content-Type" : "application/json" }'
+      #          body: ${{ env.JSON_VAR }}
+      - name: Send output to server
+        shell: bash
+        run: |
+          curl -i -X POST -H "Content-Type: multipart/form-data" -F "output-file=@build-output.txt" https://autograding-be.herokuapp.com/74144/build-outputs
+
+  # requestBody=$(printf "{\"studentId\":\"%s\", \"output\":\"%s\"}" "74144" $logOutputVar)
+  # '{ "studentId": "74144",  "output": "tefna jfjnwaofj woaifjwaiofj woaijf owai" }'
