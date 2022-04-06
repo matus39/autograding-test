@@ -57,3 +57,6 @@ jobs:
 
   # requestBody=$(printf "{\"studentId\":\"%s\", \"output\":\"%s\"}" "74144" $logOutputVar)
   # '{ "studentId": "74144",  "output": "tefna jfjnwaofj woaifjwaiofj woaijf owai" }'
+
+  # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+  # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
