@@ -1,9 +1,17 @@
 public class TestResult {
 
     private String studentIdentifier;
+
     private String testIdentifier;
+
     private int numberOfPoints;
+
     private TestResultTypeEnu testResult;
+
+    private String details;
+
+    public TestResult() {
+    }
 
     public TestResult(String studentIdentifier, String testIdentifier, int numberOfPoints, TestResultTypeEnu testResult) {
         this.studentIdentifier = studentIdentifier;
@@ -19,6 +27,7 @@ public class TestResult {
                 ", testIdentifier='" + testIdentifier + '\'' +
                 ", numberOfPoints=" + numberOfPoints +
                 ", testResult=" + testResult +
+                ", details='" + details + '\'' +
                 '}';
     }
 
@@ -52,5 +61,13 @@ public class TestResult {
 
     public void setTestResult(TestResultTypeEnu testResult) {
         this.testResult = testResult;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }
