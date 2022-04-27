@@ -19,6 +19,9 @@ public class Zad2Test extends BaseTest {
                 2,
                 TestResultTypeEnu.CORRECT
         );
+        tr.setExpectedValue("123");
+        tr.setActualValue("123");
+
         System.out.println(tr);
     }
 
@@ -31,6 +34,9 @@ public class Zad2Test extends BaseTest {
                 3,
                 TestResultTypeEnu.FAIL
         );
+        tr.setExpectedValue("AAA");
+        tr.setActualValue("cfnfawjfkn ak");
+
         System.out.println(tr);
     }
 
@@ -43,6 +49,9 @@ public class Zad2Test extends BaseTest {
                 1,
                 TestResultTypeEnu.CORRECT
         );
+        tr.setExpectedValue("true");
+        tr.setActualValue("true");
+
         System.out.println(tr);
     }
 
@@ -54,9 +63,10 @@ public class Zad2Test extends BaseTest {
         tr.setTestIdentifier("Test encryption");
         tr.setNumberOfPoints(3);
 
-        try {
-            String input = "aaaa FWANFJ 4782 @$&(";
+        String input = "aaaa FWANFJ 4782 @$&(";
+        tr.setExpectedValue(input);
 
+        try {
             CryptoHelperImpl cryptoHelper = new CryptoHelperImpl();
 
             SecretKey key = cryptoHelper.generateKey(128);
@@ -66,6 +76,7 @@ public class Zad2Test extends BaseTest {
             String plainText = cryptoHelper.decrypt(algorithm, cipherText, key, ivParameterSpec);
 
             tr.setTestResult(Objects.equals(input, plainText) ? TestResultTypeEnu.CORRECT : TestResultTypeEnu.FAIL);
+            tr.setActualValue(plainText);
 
         } catch (Exception exception) {
             tr.setTestResult(TestResultTypeEnu.FAIL);
