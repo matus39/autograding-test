@@ -1,12 +1,17 @@
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.util.Objects;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class Zad2Test extends BaseTest {
 
     @Test
+    @Order(1)
     public void testFirst2b() {
         TestResult tr = new TestResult(
                 "74144",
@@ -18,6 +23,7 @@ public class Zad2Test extends BaseTest {
     }
 
     @Test
+    @Order(2)
     public void testSecond3b() {
         TestResult tr = new TestResult(
                 "74144",
@@ -29,6 +35,7 @@ public class Zad2Test extends BaseTest {
     }
 
     @Test
+    @Order(3)
     public void testThird1b() {
         TestResult tr = new TestResult(
                 "74144",
@@ -39,8 +46,8 @@ public class Zad2Test extends BaseTest {
         System.out.println(tr);
     }
 
-
     @Test
+    @Order(4)
     void testEncryptAndDecrypt3b() {
         TestResult tr = new TestResult();
         tr.setStudentIdentifier("74144");
