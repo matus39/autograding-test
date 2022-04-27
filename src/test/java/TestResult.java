@@ -1,4 +1,9 @@
+import com.google.gson.Gson;
+
 public class TestResult {
+
+    private static final String START_TEST_RESULT_IDENTIFIER = "\n###_AUTOGRADING_TEST_RESULT_START_###\n";
+    private static final String END_TEST_RESULT_IDENTIFIER = "\n###_AUTOGRADING_TEST_RESULT_END_###\n";
 
     private String studentIdentifier;
 
@@ -22,13 +27,8 @@ public class TestResult {
 
     @Override
     public String toString() {
-        return "TestResult{" +
-                "studentIdentifier='" + studentIdentifier + '\'' +
-                ", testIdentifier='" + testIdentifier + '\'' +
-                ", numberOfPoints=" + numberOfPoints +
-                ", testResult=" + testResult +
-                ", details='" + details + '\'' +
-                '}';
+        Gson gson = new Gson();
+        return START_TEST_RESULT_IDENTIFIER + gson.toJson(this) + END_TEST_RESULT_IDENTIFIER;
     }
 
     public String getStudentIdentifier() {
