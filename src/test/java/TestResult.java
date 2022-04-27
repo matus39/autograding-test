@@ -11,6 +11,10 @@ public class TestResult {
 
     private int numberOfPoints;
 
+    private String expectedValue;
+
+    private String actualValue;
+
     private TestResultTypeEnu testResult;
 
     private String details;
@@ -69,5 +73,21 @@ public class TestResult {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public String getExpectedValue() {
+        return expectedValue;
+    }
+
+    public void setExpectedValue(String expectedValue) {
+        this.expectedValue = expectedValue;
+    }
+
+    public String getActualValue() {
+        return actualValue;
+    }
+
+    public void setActualValue(String actualValue) {
+        this.actualValue = actualValue;
     }
 }
