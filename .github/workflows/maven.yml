@@ -26,4 +26,4 @@ jobs:
       - name: Send output to server
         shell: bash
         run: |
-          curl -i -X POST -H "Content-Type: multipart/form-data" -F "output-test-file=@build-output.txt" https://autograding-be.herokuapp.com/test-output?test-branch-name=${GITHUB_HEAD_REF}
+          curl -i -X POST -H "Content-Type: multipart/form-data" -F "output-test-file=@build-output.txt" --url "https://autograding-be.herokuapp.com/test-output?test-branch-name=${{ github.ref }}"
