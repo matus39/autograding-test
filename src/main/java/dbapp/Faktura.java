@@ -12,7 +12,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "FAKTURA")
+@Table(name = "faktura")
 public class Faktura implements Serializable {
 
     private static final long serialVersionUID = 1L;

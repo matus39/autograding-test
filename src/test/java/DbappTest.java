@@ -319,6 +319,7 @@ public class DbappTest {
             st.execute("CREATE TABLE films (code char(5), title varchar(40));");
             st.executeUpdate("insert into films(code, title) values ('aa', 'title')");
             st.executeUpdate("insert into films(code, title) values ('bb', 'title2')");
+            st.executeUpdate("insert into films(code, title) values ('cc', 'title3')");
 
             st.executeUpdate("DELETE FROM POLOZKA");
             st.executeUpdate("DELETE FROM FAKTURA");
