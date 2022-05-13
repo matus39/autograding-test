@@ -3,7 +3,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ '**/java' , '!zad2/java' ]
+    branches: [ '**/java' , '!zad2/java' , '!zad3/java' ]
 
 jobs:
   build:
