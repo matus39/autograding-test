@@ -5,8 +5,6 @@ public class TestResult {
     private static final String START_TEST_RESULT_IDENTIFIER = "\n###_AUTOGRADING_TEST_RESULT_START_###\n";
     private static final String END_TEST_RESULT_IDENTIFIER = "\n###_AUTOGRADING_TEST_RESULT_END_###\n";
 
-    private String studentIdentifier;
-
     private String testIdentifier;
 
     private int numberOfPoints;
@@ -22,8 +20,7 @@ public class TestResult {
     public TestResult() {
     }
 
-    public TestResult(String studentIdentifier, String testIdentifier, int numberOfPoints, TestResultTypeEnu testResult) {
-        this.studentIdentifier = studentIdentifier;
+    public TestResult(String testIdentifier, int numberOfPoints, TestResultTypeEnu testResult) {
         this.testIdentifier = testIdentifier;
         this.numberOfPoints = numberOfPoints;
         this.testResult = testResult;
@@ -33,14 +30,6 @@ public class TestResult {
     public String toString() {
         Gson gson = new Gson();
         return START_TEST_RESULT_IDENTIFIER + gson.toJson(this) + END_TEST_RESULT_IDENTIFIER;
-    }
-
-    public String getStudentIdentifier() {
-        return studentIdentifier;
-    }
-
-    public void setStudentIdentifier(String studentIdentifier) {
-        this.studentIdentifier = studentIdentifier;
     }
 
     public String getTestIdentifier() {

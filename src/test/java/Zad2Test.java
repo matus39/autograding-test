@@ -14,7 +14,6 @@ public class Zad2Test extends BaseTest {
     @Order(1)
     public void testFirst2b() {
         TestResult tr = new TestResult(
-                "74144",
                 "Test 1",
                 2,
                 TestResultTypeEnu.CORRECT
@@ -29,7 +28,6 @@ public class Zad2Test extends BaseTest {
     @Order(2)
     public void testSecond3b() {
         TestResult tr = new TestResult(
-                "74144",
                 "Test 2",
                 3,
                 TestResultTypeEnu.FAIL
@@ -44,7 +42,6 @@ public class Zad2Test extends BaseTest {
     @Order(3)
     public void testThird1b() {
         TestResult tr = new TestResult(
-                "74144",
                 "Test 3",
                 1,
                 TestResultTypeEnu.CORRECT
@@ -59,7 +56,6 @@ public class Zad2Test extends BaseTest {
     @Order(4)
     void testEncryptAndDecrypt3b() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("Test encryption");
         tr.setNumberOfPoints(3);
 
