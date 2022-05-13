@@ -37,7 +37,6 @@ public class DbappTest {
     @Order(1)
     public void UT01pocet_3b() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("UT01pocet_3b");
         tr.setNumberOfPoints(3);
 
@@ -66,7 +65,6 @@ public class DbappTest {
     @Order(2)
     public void UT02pocet_2b() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("UT02pocet_2b");
         tr.setNumberOfPoints(2);
 
@@ -95,7 +93,6 @@ public class DbappTest {
     @Order(3)
     public void UT03pridaj_2b() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("UT03pridaj_2b");
         tr.setNumberOfPoints(2);
 
@@ -122,7 +119,6 @@ public class DbappTest {
     @Order(4)
     public void UT04pridaj4_2n() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("UT04pridaj4_2n");
         tr.setNumberOfPoints(2);
 
@@ -149,7 +145,6 @@ public class DbappTest {
     @Order(5)
     public void UT05date_1b() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("UT05date_1b");
         tr.setNumberOfPoints(1);
 
@@ -188,7 +183,6 @@ public class DbappTest {
     @Order(6)
     public void UT06pocetpol_1b() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("UT06pocetpol_1b");
         tr.setNumberOfPoints(1);
 
@@ -217,7 +211,6 @@ public class DbappTest {
     @Order(7)
     public void testForcedToBeWrong() {
         TestResult tr = new TestResult();
-        tr.setStudentIdentifier("74144");
         tr.setTestIdentifier("testForcedToBeWrong");
         tr.setNumberOfPoints(0);
 
