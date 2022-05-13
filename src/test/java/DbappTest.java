@@ -1,6 +1,7 @@
 import dbapp.Dbapp;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
@@ -16,11 +17,6 @@ public class DbappTest {
 
     @BeforeAll
     static void beforeAll() {
-//        try {
-//            prepareTables();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
         System.out.print(START_TESTS_IDENTIFIER);
     }
 
@@ -28,12 +24,13 @@ public class DbappTest {
     static void afterAll() {
         System.out.print(END_TESTS_IDENTIFIER);
     }
-    
+
     private static ResultSet rs = null;
 
 
     // POCET
     @Test
+    @Order(1)
     public void UT01pocet_3b() {
         TestResult tr = new TestResult();
         tr.setStudentIdentifier("74144");
@@ -46,8 +43,8 @@ public class DbappTest {
         int r2 = -1;
 
         try {
-            r1= Dbapp.pocetFaktur("Z1");
-            r2= Dbapp.pocetFaktur("Z2");
+            r1 = Dbapp.pocetFaktur("Z1");
+            r2 = Dbapp.pocetFaktur("Z2");
 
             tr.setActualValue(r1 + ", " + r2);
 
@@ -60,66 +57,123 @@ public class DbappTest {
 
         System.out.println(tr);
     }
-    
-//    @Test
-//    public void UT02pocet_2b() {
-//        int r3= -1;
-//        try {
-//                r3= Dbapp.pocetFaktur("Z3");
-//        } catch (Exception e) {
-//            tr.setTestResult(TestResultTypeEnu.FAIL);
-//            tr.setDetails(e.getMessage());
-//        }
-//        assertEquals(0,r3);
-//    }
-//
-//    // PRIDAJ
-//    // do 1 (mala 2)
-//    // do 3 (mala 0)
-//    // do 4 (neexistuje)
-//    @Test
-//    public void UT03pridaj_2b() {
-//        int r= -1;
-//        try {
-//                Dbapp.pridajPolozku(1, "pivo", 2.0);
-//                Dbapp.pridajPolozku(3, "pivo", 1.5);
-//        } catch (Exception e) {
-//            tr.setTestResult(TestResultTypeEnu.FAIL);
-//            tr.setDetails(e.getMessage());
-//        }
-//    }
-//
-//    @Test
-//    public void UT04pridaj4_2n() {
-//        int r= -1;
-//        try {
-//                Dbapp.pridajPolozku(4, "pivo", 2.0);
-//        } catch (Exception e) {
-//            tr.setTestResult(TestResultTypeEnu.FAIL);
-//            tr.setDetails(e.getMessage());
-//        }
-//    }
-//
-//    // kontrola aktualizacie
-//    @Test
-//    public void UT05date_1b() {
-//        String d1 = null;
-//        String d2 = null;
-//        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
-//            Statement st = con.createStatement();
-//            rs = st.executeQuery("SELECT aktualizacia FROM FAKTURA WHERE id=1");
-//            rs.next();
-//            d1 = rs.getString("AKTUALIZACIA");
-//
-//            rs = st.executeQuery("SELECT aktualizacia FROM FAKTURA WHERE id=2");
-//            rs.next();
-//            d2 = rs.getString("AKTUALIZACIA");
-//        } catch (SQLException ex) {
-//            fail("CHYBA SQL: " + ex.getMessage());
-//        }
-//        assertNotNull("aktualizacia mala byt zmenena",d1);
-//        assertNull("aktualizacia nemala byt zmenena",d2);
-//    }
+
+    @Test
+    @Order(2)
+    public void UT02pocet_2b() {
+        TestResult tr = new TestResult();
+        tr.setStudentIdentifier("74144");
+        tr.setTestIdentifier("UT02pocet_2b");
+        tr.setNumberOfPoints(2);
+
+        tr.setExpectedValue("0");
+
+        int r3 = -1;
+        try {
+            r3 = Dbapp.pocetFaktur("Z3");
+            tr.setActualValue("" + r3);
+
+            tr.setTestResult(r3 == 0 ? TestResultTypeEnu.CORRECT : TestResultTypeEnu.FAIL);
+
+        } catch (Exception e) {
+            tr.setTestResult(TestResultTypeEnu.FAIL);
+            tr.setDetails(e.getMessage());
+        }
+
+        System.out.println(tr);
+    }
+
+    // PRIDAJ
+    // do 1 (mala 2)
+    // do 3 (mala 0)
+    // do 4 (neexistuje)
+    @Test
+    @Order(3)
+    public void UT03pridaj_2b() {
+        TestResult tr = new TestResult();
+        tr.setStudentIdentifier("74144");
+        tr.setTestIdentifier("UT03pridaj_2b");
+        tr.setNumberOfPoints(2);
+
+        tr.setExpectedValue("volanie prejde bez chyby");
+
+        int r = -1;
+        try {
+            Dbapp.pridajPolozku(1, "pivo", 2.0);
+            Dbapp.pridajPolozku(3, "pivo", 1.5);
+
+            tr.setActualValue("volanie preslo bez chyby");
+
+            tr.setTestResult(TestResultTypeEnu.CORRECT);
+
+        } catch (Exception e) {
+            tr.setTestResult(TestResultTypeEnu.FAIL);
+            tr.setDetails(e.getMessage());
+        }
+
+        System.out.println(tr);
+    }
+
+    @Test
+    @Order(4)
+    public void UT04pridaj4_2n() {
+        TestResult tr = new TestResult();
+        tr.setStudentIdentifier("74144");
+        tr.setTestIdentifier("UT04pridaj4_2n");
+        tr.setNumberOfPoints(2);
+
+        tr.setExpectedValue("volanie prejde bez chyby");
+
+        int r = -1;
+        try {
+            Dbapp.pridajPolozku(4, "pivo", 2.0);
+
+            tr.setActualValue("volanie preslo bez chyby");
+
+            tr.setTestResult(TestResultTypeEnu.CORRECT);
+
+        } catch (Exception e) {
+            tr.setTestResult(TestResultTypeEnu.FAIL);
+            tr.setDetails(e.getMessage());
+        }
+
+        System.out.println(tr);
+    }
+
+    // kontrola aktualizacie
+    @Test
+    @Order(5)
+    public void UT05date_1b() {
+        TestResult tr = new TestResult();
+        tr.setStudentIdentifier("74144");
+        tr.setTestIdentifier("UT05date_1b");
+        tr.setNumberOfPoints(1);
+
+        tr.setExpectedValue("notNull, null");
+
+        String d1 = null;
+        String d2 = null;
+        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
+            Statement st = con.createStatement();
+            rs = st.executeQuery("SELECT aktualizacia FROM FAKTURA WHERE id=1");
+            rs.next();
+            d1 = rs.getString("AKTUALIZACIA");
+
+            rs = st.executeQuery("SELECT aktualizacia FROM FAKTURA WHERE id=2");
+            rs.next();
+            d2 = rs.getString("AKTUALIZACIA");
+
+            tr.setTestResult((d1 != null && d2 == null) ? TestResultTypeEnu.CORRECT : TestResultTypeEnu.FAIL);
+
+            tr.setActualValue(d1 + ", " + d2);
+
+        } catch (SQLException ex) {
+            tr.setTestResult(TestResultTypeEnu.FAIL);
+            tr.setDetails(ex.getMessage());
+        }
+
+        System.out.println(tr);
+    }
 //
 //
 //    // kontroly
@@ -223,7 +277,7 @@ public class DbappTest {
             st.executeUpdate("INSERT INTO POLOZKA VALUES (22, 22.90 , 'P22', 2)");
         } catch (SQLException ex) {
             Logger.getLogger(DbappTest.class.getName()).log(Level.INFO, ex.getMessage());
-        }        
+        }
     }
 
 }
