@@ -37,7 +37,7 @@ jobs:
 
       - name: Build with Maven
         id: maven-build-step
-        run: mvn -B package --file pom.xml
+        run: mvn -B clean install --file pom.xml
 
 #      - name: Send output to server
 #        shell: bash
