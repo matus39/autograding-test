@@ -213,6 +213,35 @@ public class DbappTest {
 
         System.out.println(tr);
     }
+
+    @Test
+    @Order(7)
+    public void ttttt() {
+        TestResult tr = new TestResult();
+        tr.setStudentIdentifier("74144");
+        tr.setTestIdentifier("tttt");
+        tr.setNumberOfPoints(111);
+
+        tr.setExpectedValue("2");
+
+        int n = 0;
+        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
+            Statement st = con.createStatement();
+            rs = st.executeQuery("SELECT count(*) FROM films");
+            rs.next();
+            n = rs.getInt(1);
+
+            tr.setActualValue("" + n);
+
+            tr.setTestResult(n == 2 ? TestResultTypeEnu.CORRECT : TestResultTypeEnu.FAIL);
+
+        } catch (SQLException ex) {
+            tr.setTestResult(TestResultTypeEnu.FAIL);
+            tr.setDetails(ex.getMessage());
+        }
+
+        System.out.println(tr);
+    }
 //
 //    @Test
 //    public void UT07pocetpol_1b() {
@@ -288,16 +317,17 @@ public class DbappTest {
         try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
             Statement st = con.createStatement();
             st.execute("CREATE TABLE films (code char(5), title varchar(40));");
-            st.executeUpdate("DELETE FROM films");
+            st.executeUpdate("insert into films(cide, title) values ('aa', 'title')");
+            st.executeUpdate("insert into films(cide, title) values ('bb', 'title2')");
 
             st.executeUpdate("DELETE FROM POLOZKA");
             st.executeUpdate("DELETE FROM FAKTURA");
-            st.executeUpdate("INSERT INTO FAKTURA VALUES (1, NULL, 'Z1')");
-            st.executeUpdate("INSERT INTO FAKTURA VALUES (2, NULL, 'Z2')");
-            st.executeUpdate("INSERT INTO FAKTURA VALUES (3, NULL, 'Z2')");
-            st.executeUpdate("INSERT INTO POLOZKA VALUES (11, 11.90 , 'P11', 1)");
-            st.executeUpdate("INSERT INTO POLOZKA VALUES (12, 21.90 , 'P12', 1)");
-            st.executeUpdate("INSERT INTO POLOZKA VALUES (22, 22.90 , 'P22', 2)");
+//            st.executeUpdate("INSERT INTO FAKTURA VALUES (1, NULL, 'Z1')");
+//            st.executeUpdate("INSERT INTO FAKTURA VALUES (2, NULL, 'Z2')");
+//            st.executeUpdate("INSERT INTO FAKTURA VALUES (3, NULL, 'Z2')");
+//            st.executeUpdate("INSERT INTO POLOZKA VALUES (11, 11.90 , 'P11', 1)");
+//            st.executeUpdate("INSERT INTO POLOZKA VALUES (12, 21.90 , 'P12', 1)");
+//            st.executeUpdate("INSERT INTO POLOZKA VALUES (22, 22.90 , 'P22', 2)");
         } catch (SQLException ex) {
             Logger.getLogger(DbappTest.class.getName()).log(Level.INFO, ex.getMessage());
         }
