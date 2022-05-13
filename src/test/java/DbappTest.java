@@ -17,6 +17,11 @@ public class DbappTest {
 
     @BeforeAll
     static void beforeAll() {
+        try {
+            prepareTables();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         System.out.print(START_TESTS_IDENTIFIER);
     }
 
@@ -174,25 +179,40 @@ public class DbappTest {
 
         System.out.println(tr);
     }
-//
-//
-//    // kontroly
-//    // 1 pocet poloziek = 3
-//    // 3 pocet poloziek = 1
-//    // 3 cena 1. polozky = 1.5
-//    @Test
-//    public void UT06pocetpol_1b() {
-//        int n = 0;
-//        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
-//            Statement st = con.createStatement();
-//            rs = st.executeQuery("SELECT count(*) FROM POLOZKA WHERE FAKTURA_ID=1");
-//            rs.next();
-//            n = rs.getInt(1);
-//        } catch (SQLException ex) {
-//            fail("CHYBA SQL: " + ex.getMessage());
-//        }
-//        assertEquals(3, n);
-//    }
+
+
+    // kontroly
+    // 1 pocet poloziek = 3
+    // 3 pocet poloziek = 1
+    // 3 cena 1. polozky = 1.5
+    @Test
+    @Order(6)
+    public void UT06pocetpol_1b() {
+        TestResult tr = new TestResult();
+        tr.setStudentIdentifier("74144");
+        tr.setTestIdentifier("UT06pocetpol_1b");
+        tr.setNumberOfPoints(1);
+
+        tr.setExpectedValue("3");
+
+        int n = 0;
+        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
+            Statement st = con.createStatement();
+            rs = st.executeQuery("SELECT count(*) FROM POLOZKA WHERE FAKTURA_ID=1");
+            rs.next();
+            n = rs.getInt(1);
+
+            tr.setActualValue("" + n);
+
+            tr.setTestResult(n == 3 ? TestResultTypeEnu.CORRECT : TestResultTypeEnu.FAIL);
+
+        } catch (SQLException ex) {
+            tr.setTestResult(TestResultTypeEnu.FAIL);
+            tr.setDetails(ex.getMessage());
+        }
+
+        System.out.println(tr);
+    }
 //
 //    @Test
 //    public void UT07pocetpol_1b() {

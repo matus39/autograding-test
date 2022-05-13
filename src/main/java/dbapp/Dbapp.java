@@ -18,35 +18,35 @@ import javax.persistence.TypedQuery;
  */
 public class Dbapp {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        create();
-    }
-
-    public static void create() {
-        Polozka p = new Polozka();
-        Faktura f = new Faktura();
-        f.getPolozky().add(p);
-        f.setZakaznik("Jozo");
-        f.setAktualizacia(new Date());
-
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbappPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(p);
-            em.persist(f);
-            em.getTransaction().commit();
-            System.out.println("HOTOVO");
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String[] args) {
+//        create();
+//    }
+//
+//    public static void create() {
+//        Polozka p = new Polozka();
+//        Faktura f = new Faktura();
+//        f.getPolozky().add(p);
+//        f.setZakaznik("Jozo");
+//        f.setAktualizacia(new Date());
+//
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbappPU");
+//        EntityManager em = emf.createEntityManager();
+//        em.getTransaction().begin();
+//        try {
+//            em.persist(p);
+//            em.persist(f);
+//            em.getTransaction().commit();
+//            System.out.println("HOTOVO");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            em.getTransaction().rollback();
+//        } finally {
+//            em.close();
+//        }
+//    }
 
     public static int pocetFaktur(String z) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbappPU");
