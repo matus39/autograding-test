@@ -321,14 +321,15 @@ public class DbappTest {
             st.executeUpdate("insert into films(code, title) values ('bb', 'title2')");
             st.executeUpdate("insert into films(code, title) values ('cc', 'title3')");
 
-            st.executeUpdate("DELETE FROM POLOZKA");
-            st.executeUpdate("DELETE FROM FAKTURA");
-            st.executeUpdate("INSERT INTO FAKTURA VALUES (1, NULL, 'Z1')");
-            st.executeUpdate("INSERT INTO FAKTURA VALUES (2, NULL, 'Z2')");
-            st.executeUpdate("INSERT INTO FAKTURA VALUES (3, NULL, 'Z2')");
-            st.executeUpdate("INSERT INTO POLOZKA VALUES (11, 11.90 , 'P11', 1)");
-            st.executeUpdate("INSERT INTO POLOZKA VALUES (12, 21.90 , 'P12', 1)");
-            st.executeUpdate("INSERT INTO POLOZKA VALUES (22, 22.90 , 'P22', 2)");
+            st.execute("CREATE TABLE faktura(id integer PRIMARY KEY, zakaznik char(255), aktualizacia date);");
+            st.execute("CREATE TABLE polozka(id integer PRIMARY KEY, produkt char(255), cena real, faktura_id integer REFERENCES faktura (id));");
+
+            st.executeUpdate("INSERT INTO faktura(id, aktualizacia, zakaznik) VALUES (1, NULL, 'Z1')");
+            st.executeUpdate("INSERT INTO faktura(id, aktualizacia, zakaznik) VALUES (2, NULL, 'Z2')");
+            st.executeUpdate("INSERT INTO faktura(id, aktualizacia, zakaznik) VALUES (3, NULL, 'Z2')");
+            st.executeUpdate("INSERT INTO polozka(id, cena, produkt, faktura_id) VALUES (11, 11.90 , 'P11', 1)");
+            st.executeUpdate("INSERT INTO polozka(id, cena, produkt, faktura_id) VALUES (12, 21.90 , 'P12', 1)");
+            st.executeUpdate("INSERT INTO polozka(id, cena, produkt, faktura_id) VALUES (22, 22.90 , 'P22', 2)");
 
         } catch (SQLException ex) {
             Logger.getLogger(DbappTest.class.getName()).log(Level.INFO, ex.getMessage());
