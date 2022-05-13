@@ -32,7 +32,6 @@ public class DbappTest {
 
     private static ResultSet rs = null;
 
-
     // POCET
     @Test
     @Order(1)
@@ -216,18 +215,18 @@ public class DbappTest {
 
     @Test
     @Order(7)
-    public void ttttt() {
+    public void testForcedToBeWrong() {
         TestResult tr = new TestResult();
         tr.setStudentIdentifier("74144");
-        tr.setTestIdentifier("tttt");
-        tr.setNumberOfPoints(111);
+        tr.setTestIdentifier("testForcedToBeWrong");
+        tr.setNumberOfPoints(0);
 
         tr.setExpectedValue("2");
 
         int n = 0;
         try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
             Statement st = con.createStatement();
-            rs = st.executeQuery("SELECT count(*) FROM films");
+            rs = st.executeQuery("SELECT count(*) FROM test_table");
             rs.next();
             n = rs.getInt(1);
 
@@ -242,84 +241,16 @@ public class DbappTest {
 
         System.out.println(tr);
     }
-//
-//    @Test
-//    public void UT07pocetpol_1b() {
-//        int n = 0;
-//        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
-//            Statement st = con.createStatement();
-//            rs = st.executeQuery("SELECT count(*) FROM POLOZKA WHERE FAKTURA_ID=3");
-//            rs.next();
-//            n = rs.getInt(1);
-//        } catch (SQLException ex) {
-//            fail("CHYBA SQL: " + ex.getMessage());
-//        }
-//        assertEquals(1, n);
-//    }
-//
-//    @Test
-//    public void UT08cena_1b() {
-//        double d = 0;
-//        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
-//            Statement st = con.createStatement();
-//            rs = st.executeQuery("SELECT cena FROM POLOZKA WHERE FAKTURA_ID=3");
-//            rs.next();
-//            d = rs.getDouble("CENA");
-//        } catch (SQLException ex) {
-//            fail("CHYBA SQL: " + ex.getMessage());
-//        }
-//        assertEquals(1.5, d, 0.001);
-//    }
-//
-//    // kontroly
-//    // pocet piv spolu = 2
-//    // pocet poloziek spolu
-//    // pocet zmluv spolu
-//    @Test
-//    public void UT09chekpolozky_1b() {
-//        int n1 = 0;
-//        int n2 = 0;
-//        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
-//            Statement st1 = con.createStatement();
-//            rs = st1.executeQuery("SELECT count(*) FROM POLOZKA WHERE PRODUKT='pivo'");
-//            rs.next();
-//            n1 = rs.getInt(1);
-//            Statement st2 = con.createStatement();
-//            rs = st1.executeQuery("SELECT count(*) FROM POLOZKA");
-//            rs.next();
-//            n2 = rs.getInt(1);
-//
-//        } catch (SQLException ex) {
-//            fail("CHYBA SQL: " + ex.getMessage());
-//        }
-//        assertEquals(2, n1);
-//        assertEquals(5, n2);
-//    }
-//
-//    @Test
-//    public void UT99check_2n() {
-//        int d = -1;
-//        try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
-//            Statement st = con.createStatement();
-//            rs = st.executeQuery("SELECT count(*) FROM FAKTURA");
-//            rs.next();
-//            d = rs.getInt(1);
-//        } catch (SQLException ex) {
-//            fail("CHYBA SQL: " + ex.getMessage());
-//        }
-//        assertEquals(3,d);
-//    }
-
 
     static private void prepareTables() throws ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
 
         try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
             Statement st = con.createStatement();
-            st.execute("CREATE TABLE films (code char(5), title varchar(40));");
-            st.executeUpdate("insert into films(code, title) values ('aa', 'title')");
-            st.executeUpdate("insert into films(code, title) values ('bb', 'title2')");
-            st.executeUpdate("insert into films(code, title) values ('cc', 'title3')");
+            st.execute("CREATE TABLE test_table (code char(5), title varchar(40));");
+            st.executeUpdate("insert into test_table(code, title) values ('aa', 'title')");
+            st.executeUpdate("insert into test_table(code, title) values ('bb', 'title2')");
+            st.executeUpdate("insert into test_table(code, title) values ('cc', 'title3')");
 
             st.execute("CREATE TABLE faktura(id integer PRIMARY KEY, zakaznik char(255), aktualizacia date);");
             st.execute("CREATE TABLE polozka(id integer PRIMARY KEY, produkt char(255), cena real, faktura_id integer REFERENCES faktura (id));");
