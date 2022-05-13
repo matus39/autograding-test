@@ -317,8 +317,8 @@ public class DbappTest {
         try (Connection con = DriverManager.getConnection(DB_URL, "postgres", "postgres")) {
             Statement st = con.createStatement();
             st.execute("CREATE TABLE films (code char(5), title varchar(40));");
-            st.executeUpdate("insert into films(cide, title) values ('aa', 'title')");
-            st.executeUpdate("insert into films(cide, title) values ('bb', 'title2')");
+            st.executeUpdate("insert into films(code, title) values ('aa', 'title')");
+            st.executeUpdate("insert into films(code, title) values ('bb', 'title2')");
 
             st.executeUpdate("DELETE FROM POLOZKA");
             st.executeUpdate("DELETE FROM FAKTURA");
